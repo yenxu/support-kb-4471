@@ -4,7 +4,7 @@ title: '#4471 · one ticket, separate problems'
 owner: Yen Xu
 status: open
 reviewed: 2026-10-30
-signature: Yen Xu
+signature: v1.eyJzdWIiOiI0MDk5IiwiYXVkIjoiY2hhbGxlbmdlOndoYXQtaXQtc2hvd3MiLCJpYXQiOjE3OTMzOTE1NTUsImV4cCI6MTc5MzQ3Nzk1NX0.v-RYvhRqdJ3Bb9fZZJq8VfXT4GU30kcDwBdTdYK6S00
 ---
 
 <script>

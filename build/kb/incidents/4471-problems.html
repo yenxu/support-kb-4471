@@ -1,13 +1,13 @@
 <!doctype html>
 <html lang="en">
-  <head><meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" /><link href="../../_app/immutable/entry/start.ngl19MPI.js" rel="modulepreload">
-		<link href="../../_app/immutable/chunks/i6OsYTjz.js" rel="modulepreload">
+  <head><meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" /><link href="../../_app/immutable/entry/start.2FwAeJ-Z.js" rel="modulepreload">
+		<link href="../../_app/immutable/chunks/C975Lxvn.js" rel="modulepreload">
 		<link href="../../_app/immutable/chunks/W8JXJZ79.js" rel="modulepreload">
-		<link href="../../_app/immutable/entry/app.MGtUdTZp.js" rel="modulepreload">
+		<link href="../../_app/immutable/entry/app.BeuEJdT2.js" rel="modulepreload">
 		<link href="../../_app/immutable/chunks/xihTtKlq.js" rel="modulepreload">
 		<link href="../../_app/immutable/nodes/0.C46UDYLG.js" rel="modulepreload">
-		<link href="../../_app/immutable/nodes/5.B_5wL1rc.js" rel="modulepreload">
-		<link href="../../_app/immutable/chunks/CAQUxR52.js" rel="modulepreload">
+		<link href="../../_app/immutable/nodes/5.rP-Bxj28.js" rel="modulepreload">
+		<link href="../../_app/immutable/chunks/CtF18jay.js" rel="modulepreload">
 		<link href="../../_app/immutable/chunks/DooIRhXB.js" rel="modulepreload">
 		<link href="../../_app/immutable/chunks/CVBzP17p.js" rel="modulepreload">
 		<link href="../../_app/immutable/chunks/CrgYNgkp.js" rel="modulepreload">
@@ -20,19 +20,19 @@ holds separate bugs. The queued parser fix closes only one of them.</p> <aside c
   15 duplicate rows in the export dropped</p> <table><thead><tr><th>problem</th><th>reports</th><th>tenants</th><th>seen</th><th>ticket</th></tr></thead><tbody><!--[--><tr><td><code>parser</code> Shared date parser reads day-first dates month first<br/><small class="svelte-1op6c6">A day-first tenant books 7 April; the invite goes out for 4 July.</small></td><td>379</td><td>11</td><td>2026-04-01 → 2026-10-04</td><td><!--[0--><a href="https://github.com/yenxu/support-kb-4471/issues/1">#1</a><!--]--></td></tr><tr><td><code>hint</code> booking-v3 form hints MM/DD/YYYY to day-first tenants<br/><small class="svelte-1op6c6">People type what the hint says, month first; the form reads it day first.</small></td><td>33</td><td>3</td><td>2026-04-17 → 2026-09-22</td><td><!--[0--><a href="https://github.com/yenxu/support-kb-4471/issues/2">#2</a><!--]--></td></tr><!--]--></tbody></table> <!--[--><!--[0--><p class="note svelte-1op6c6">5 of the <code>parser</code> reports were read by the desk as a one-day move; counted here, with their tenant.</p><!--]--><!--[-1--><!--]--><!--]--><!----> <h2>How each report was placed</h2> <ol><li>Count each report id once. The ticket export repeats rows where its pages overlap.</li> <li>The tenant decides, not intake’s tag (<a href="/kb/triage/dedupe">causes.ts</a>):
 a <code>form</code> report from a <code>booking-v3</code> tenant is <code>hint</code>; every other day-first report is <code>parser</code>.</li> <li>Reports the desk read as a one-day move stay with their tenant’s problem, footnoted.</li></ol> <h2>Why it was one ticket</h2> <p>Reports were merged on subject line (<a href="/kb/decisions/0001-dedupe-by-subject">decision 0001</a>).
 Every subject here says “wrong day”. The subject names the symptom; the cause is in the
-tenant, the channel and the body.</p> <!--[0--><p class="stamp svelte-1280m42">desk ref <b class="svelte-1280m42">DR-1W8R-H1KJ</b></p><!--]--><!----><!----></main> <footer class="svelte-e2jw2j">Pages are written by people. Tables and charts are built from data at render time.</footer></div><!--]--><!----><!--]--><!--]--> <!--[-1--><!--]--><!--]-->
+tenant, the channel and the body.</p> <!--[0--><p class="stamp svelte-1280m42">desk ref <b class="svelte-1280m42">DR-P73F-JWA5</b></p><!--]--><!----><!----></main> <footer class="svelte-e2jw2j">Pages are written by people. Tables and charts are built from data at render time.</footer></div><!--]--><!----><!--]--><!--]--> <!--[-1--><!--]--><!--]-->
 			
 			<script>
 				{
-					__sveltekit_dvwbgd = {
+					__sveltekit_1bpq254 = {
 						base: new URL("../..", location).pathname.slice(0, -1)
 					};
 
 					const element = document.currentScript.parentElement;
 
 					Promise.all([
-						import("../../_app/immutable/entry/start.ngl19MPI.js"),
-						import("../../_app/immutable/entry/app.MGtUdTZp.js")
+						import("../../_app/immutable/entry/start.2FwAeJ-Z.js"),
+						import("../../_app/immutable/entry/app.BeuEJdT2.js")
 					]).then(([kit, app]) => {
 						kit.start(app, element, {
 							node_ids: [0, 5],
