@@ -1,10 +1,9 @@
 // What #4471 holds once each report sits with the bug that made it.
-// causes.ts places a report by tenant; that is right for flips, and blind to a date that moved by
-// one day. A day/month flip can't move a date by one day, so the desk's oneDayMove reading wins over
-// the tenant here.
+// The tenant decides (causes.ts), never intake's tag. The desk's oneDayMove reading is kept as a
+// footnote, not a problem: those reports come from the same tenants through the same parser.
 import { causeOf, uniqueById, type Report, type Tenant } from '#lib/kb/causes';
 
-export type Problem = 'parser' | 'hint' | 'shift' | 'unplaced';
+export type Problem = 'parser' | 'hint' | 'unplaced';
 
 export const PROBLEMS: Record<Problem, { title: string; what: string }> = {
   parser: {
@@ -15,22 +14,25 @@ export const PROBLEMS: Record<Problem, { title: string; what: string }> = {
     title: 'booking-v3 form hints MM/DD/YYYY to day-first tenants',
     what: 'People type what the hint says, month first; the form reads it day first.',
   },
-  shift: {
-    title: 'Invite dates move by one day (time zone, not the parser)',
-    what: 'Same month, one day off: Tuesday 12 May shows as Monday 11 May.',
-  },
   unplaced: {
     title: 'Not placed: tenant unknown or month-first',
     what: 'No tenant on file, or a tenant that writes the month first.',
   },
 };
 
-export function problemOf(r: Report, t: Tenant | undefined, oneDayMove: readonly string[]): Problem {
-  if (oneDayMove.includes(r.id)) return 'shift';
+export function problemOf(r: Report, t: Tenant | undefined): Problem {
   return causeOf(r, t) ?? 'unplaced';
 }
 
-export type ProblemRow = { problem: Problem; reports: Report[]; tenants: number; firstSeen: string; lastSeen: string };
+export type ProblemRow = {
+  problem: Problem;
+  reports: Report[];
+  tenants: number;
+  firstSeen: string;
+  lastSeen: string;
+  // How many of these the desk read as a one-day move.
+  readAsOneDay: number;
+};
 
 export function problemsIn(
   all: Report[],
@@ -40,13 +42,20 @@ export function problemsIn(
 ): ProblemRow[] {
   const byProblem = new Map<Problem, Report[]>();
   for (const r of uniqueById(all).filter((r) => r.mergedInto === ticket)) {
-    const p = problemOf(r, tenantOf(r), oneDayMove);
+    const p = problemOf(r, tenantOf(r));
     byProblem.set(p, [...(byProblem.get(p) ?? []), r]);
   }
   return [...byProblem.entries()]
     .map(([problem, rs]) => {
       const days = rs.map((r) => r.receivedAt.slice(0, 10)).sort();
-      return { problem, reports: rs, tenants: new Set(rs.map((r) => r.tenant)).size, firstSeen: days[0], lastSeen: days[days.length - 1] };
+      return {
+        problem,
+        reports: rs,
+        tenants: new Set(rs.map((r) => r.tenant)).size,
+        firstSeen: days[0],
+        lastSeen: days[days.length - 1],
+        readAsOneDay: rs.filter((r) => oneDayMove.includes(r.id)).length,
+      };
     })
     .sort((a, b) => b.reports.length - a.reports.length);
 }

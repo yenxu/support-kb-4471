@@ -27,10 +27,9 @@ Not known. One ticket per problem below. Do not close #4471 when the parser fix 
 ## How each report was placed
 
 1. Count each report id once. The ticket export repeats rows where its pages overlap.
-2. A date that moved by one day (desk notes, `oneDayMove`) is `shift`. A day/month flip cannot
-   do that, whatever the tenant.
-3. Otherwise the tenant decides, not intake's tag ([causes.ts](/kb/triage/dedupe)):
+2. The tenant decides, not intake's tag ([causes.ts](/kb/triage/dedupe)):
    a `form` report from a `booking-v3` tenant is `hint`; every other day-first report is `parser`.
+3. Reports the desk read as a one-day move stay with their tenant's problem, footnoted.
 
 ## Why it was one ticket
 

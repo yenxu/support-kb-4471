@@ -16,16 +16,13 @@ const base: Report = {
 
 describe('problemOf', () => {
   it('a booking-v3 form report is the hint bug, whatever intake tagged', () => {
-    expect(problemOf(base, tenantOf(base), [])).toBe('hint');
+    expect(problemOf(base, tenantOf(base))).toBe('hint');
   });
   it('the same tenant by email goes through the parser', () => {
-    expect(problemOf({ ...base, channel: 'email' }, tenantOf(base), [])).toBe('parser');
-  });
-  it('a one-day move beats the tenant', () => {
-    expect(problemOf(base, tenantOf(base), ['R-1'])).toBe('shift');
+    expect(problemOf({ ...base, channel: 'email' }, tenantOf(base))).toBe('parser');
   });
   it('no tenant on file stays unplaced', () => {
-    expect(problemOf({ ...base, tenant: 'nobody' }, undefined, [])).toBe('unplaced');
+    expect(problemOf({ ...base, tenant: 'nobody' }, undefined)).toBe('unplaced');
   });
 });
 
@@ -37,7 +34,10 @@ describe('#4471 export', () => {
     expect(reports.length).toBeGreaterThan(412);
     expect(rows.reduce((n, r) => n + r.reports.length, 0)).toBe(412);
   });
-  it('splits into three problems', () => {
-    expect(count).toEqual({ parser: 374, hint: 33, shift: 5 });
+  it('splits into two problems', () => {
+    expect(count).toEqual({ parser: 379, hint: 33 });
+  });
+  it('keeps the desk\'s one-day readings inside parser, as a footnote', () => {
+    expect(rows.find((r) => r.problem === 'parser')?.readAsOneDay).toBe(5);
   });
 });

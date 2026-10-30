@@ -38,7 +38,14 @@
   </tbody>
 </table>
 
+{#each rows as r (r.problem)}
+  {#if r.readAsOneDay}
+    <p class="note">{r.readAsOneDay} of the <code>{r.problem}</code> reports were read by the desk as a one-day move; counted here, with their tenant.</p>
+  {/if}
+{/each}
+
 <style>
   .sum { font-size: 1.1rem; }
-  small { color: var(--muted); }
+  small, .note { color: var(--muted); }
+  .note { font-size: 0.85em; }
 </style>
